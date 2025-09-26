@@ -1,5 +1,7 @@
 #include "gate.hpp"
 
+#include <iostream>
+
 #include "node.hpp"
 #include "scheduler.hpp"
 
@@ -8,10 +10,14 @@ Gate::Gate(std::vector<Node*> inputs,
            std::string name)
     : m_inputs(inputs)
     , m_outputs(outputs)
-    , name(name)
+    , m_name(name)
 {
     for (const auto& input : inputs)
+    {
+        // std::cout << m_name << ": adding connection " << input->m_name
+        //           << std::endl;
         input->add_connection(this);
+    }
 }
 
 void Gate::initial_update()
